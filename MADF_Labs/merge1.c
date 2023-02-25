@@ -43,7 +43,7 @@ void mergesort(int low, int high)
 int main()
 {
     int n;
-    printf("Enter the size of the arr.\n");
+    printf("Enter the size of the array.\n");
     scanf("%d", &n);
     getchar();
     printf("Enter the characters to be sorted.\n");
