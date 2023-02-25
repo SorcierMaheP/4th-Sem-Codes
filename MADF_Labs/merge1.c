@@ -1,5 +1,5 @@
 #include <stdio.h>
-char a[1000], b[100];
+char a[100], b[100];
 void merge(int low, int mid, int high)
 {
     int h = low, i = low, j = mid + 1;
