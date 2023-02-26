@@ -2,7 +2,7 @@
 char a[100], b[100];
 void merge(int low, int mid, int high)
 {
-    int h = low, i = lw, j = mid + 1;
+    int h = low, i = low, j = mid + 1;
     while ((h <= mid) && (j <= high))
     {
         if (a[h] < a[j])
