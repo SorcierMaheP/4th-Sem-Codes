@@ -39,7 +39,7 @@ void quicksort(int p, int q)
 int main()
 {
     int n;
-    printf("Enter the size of the aray.\n");
+    printf("Enter the size of the array.\n");
     scanf("%d", &n);
     printf("Enter the elements.\n");
     for (int i = 0; i < n; i++)
