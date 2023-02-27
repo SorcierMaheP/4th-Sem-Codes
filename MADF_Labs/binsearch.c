@@ -23,7 +23,7 @@ int binsearch(char a[], int low, int high, char x)
 int main()
 {
     int x;
-    printf("Enter elem to be searched.\n");
+    printf("Enter elem to be search.\n");
     scanf("%c", &x);
     printf("Enter size of the array.\n");
     int n;
