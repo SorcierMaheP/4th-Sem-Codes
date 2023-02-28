@@ -32,7 +32,7 @@ void merge(int low, int mid, int high)
 void mergesort(int low, int high)
 {
     int mid;
-    while (low < high)
+    if (low < high)
     {
         mid = (low + high) / 2;
         mergesort(low, mid);
