@@ -56,6 +56,6 @@ int main()
     printf("Enter the order of smallest elem you want to display.\n");
     scanf("%d", &sel);
     char ch = kthsmallest(n, sel - 1);
-    printf("The %d smallest element is %c.\n", sel, ch);
+    printf("The %dth smallest element is %c.\n", sel, ch);
     return 0;
 }
