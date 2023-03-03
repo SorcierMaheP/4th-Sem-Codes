@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-int **zero = NULL;
 int **matralloc(int **a, int rows, int columns)
 {
     a = (int **)malloc(rows * sizeof(int *));
@@ -31,7 +30,6 @@ int **sum(int **a, int **b, int **c, int r1, int c1, int r2, int c2)
 {
     for (int i = r1, l = 0, p = r2; i < r1 + 2; i++, l++, p++)
     {
-        int m = 0;
         for (int j = c1, m = 0, q = c2; j < c1 + 2; j++, m++, q++)
             *(*(c + l) + m) = *(*(a + i) + j) + *(*(b + p) + q);
     }
@@ -41,11 +39,19 @@ int **sub(int **a, int **b, int **c, int r1, int c1, int r2, int c2)
 {
     for (int i = r1, l = 0, p = r2; i < r1 + 2; i++, l++, p++)
     {
-        int m = 0;
         for (int j = c1, m = 0, q = c2; j < c1 + 2; j++, m++, q++)
             *(*(c + l) + m) = *(*(a + i) + j) - *(*(b + p) + q);
     }
     return c;
+}
+int **part(int **a, int **b, int r1, int c1)
+{
+    for (int i = r1, l = 0; i < r1 + 2; i++, l++)
+    {
+        for (int j = c1, m = 0; j < c1 + 2; j++, m++)
+            *(*(b + l) + m) = *(*(a + i) + j);
+    }
+    return b;
 }
 void strassen(int **a, int **b, int **c, int rows, int columns)
 {
@@ -78,10 +84,10 @@ void strassen(int **a, int **b, int **c, int rows, int columns)
         u = matralloc(u, 2, 2);
         v = matralloc(v, 2, 2);
         strassen((temp1 = sum(a, a, temp1, 0, 0, 2, 2)), (temp2 = sum(b, b, temp2, 0, 0, 2, 2)), p, 2, 2);
-        strassen((temp1 = sum(a, a, temp1, 2, 0, 2, 2)), (temp2 = sum(b, zero, temp2, 0, 0, 0, 0)), q, 2, 2);
-        strassen((temp1 = sum(a, zero, temp1, 0, 0, 0, 0)), (temp2 = sub(b, b, temp2, 0, 2, 2, 2)), r, 2, 2);
-        strassen((temp1 = sum(a, zero, temp1, 2, 2, 0, 0)), (temp2 = sub(b, b, temp2, 2, 0, 0, 0)), s, 2, 2);
-        strassen((temp1 = sum(a, a, temp1, 0, 0, 0, 2)), (temp2 = sum(b, zero, temp2, 2, 2, 0, 0)), t, 2, 2);
+        strassen((temp1 = sum(a, a, temp1, 2, 0, 2, 2)), (temp2 = part(b, temp2, 0, 0)), q, 2, 2);
+        strassen((temp1 = part(a, temp1, 0, 0)), (temp2 = sub(b, b, temp2, 0, 2, 2, 2)), r, 2, 2);
+        strassen((temp1 = part(a, temp1, 2, 2)), (temp2 = sub(b, b, temp2, 2, 0, 0, 0)), s, 2, 2);
+        strassen((temp1 = sum(a, a, temp1, 0, 0, 0, 2)), (temp2 = part(b, temp2, 2, 2)), t, 2, 2);
         strassen((temp1 = sub(a, a, temp1, 2, 0, 0, 0)), (temp2 = sum(b, b, temp2, 0, 0, 0, 2)), u, 2, 2);
         strassen((temp1 = sub(a, a, temp1, 0, 2, 2, 2)), (temp2 = sum(b, b, temp2, 2, 0, 2, 2)), v, 2, 2);
         int **c00 = NULL, **c01 = NULL, **c10 = NULL, **c11 = NULL;
@@ -111,16 +117,10 @@ int main()
     a = matralloc(a, 4, 4);
     b = matralloc(b, 4, 4);
     c = matralloc(c, 4, 4);
-    zero = matralloc(zero, 4, 4);
     printf("Enter the elements of m1.\n");
     accept(a, 4, 4);
     printf("Enter the elements of m2.\n");
     accept(b, 4, 4);
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-            *(*(zero + i) + j) = 0;
-    }
     strassen(a, b, c, 4, 4);
     printf("The elements of multiplied matrix are:\n");
     display(c, 4, 4);
