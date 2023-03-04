@@ -21,7 +21,7 @@ void display(int **a, int rows, int columns)
     {
         for (int j = 0; j < columns; j++)
         {
-            printf("%d ", *(*(a + i) + j));
+            printf("%5d ", *(*(a + i) + j));
         }
         printf("\n");
     }
