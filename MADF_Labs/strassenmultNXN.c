@@ -167,7 +167,7 @@ int main()
     printf("Enter the display width for the resultant matrix elements.\n");
     scanf("%d", &w);
     printf("The elements of multiplied matrix are:\n");
-    display(c, n, n, w);
+    display(c, m, m, w);
     free(a);
     free(b);
     free(c);
