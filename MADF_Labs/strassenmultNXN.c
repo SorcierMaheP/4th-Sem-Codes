@@ -29,18 +29,15 @@ void display(int **a, int rows, int columns, int width)
 }
 void padding(int **a, int m, int n)
 {
-    if (m != n)
+    for (int i = m; i < n; i++)
     {
-        for (int i = m; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-                *(*(a + i) + j) = 0;
-        }
-        for (int j = m; j < n; j++)
-        {
-            for (int i = 0; i < n; i++)
-                *(*(a + i) + j) = 0;
-        }
+        for (int j = 0; j < n; j++)
+            *(*(a + i) + j) = 0;
+    }
+    for (int j = m; j < n; j++)
+    {
+        for (int i = 0; i < n; i++)
+            *(*(a + i) + j) = 0;
     }
 }
 int **sum(int **a, int **b, int **c, int r1, int c1, int r2, int c2, int incr)
@@ -102,31 +99,22 @@ void strassen(int **a, int **b, int **c, int rows, int columns)
         t = matralloc(t, rows / 2, columns / 2);
         u = matralloc(u, rows / 2, columns / 2);
         v = matralloc(v, rows / 2, columns / 2);
-        strassen((temp1 = sum(a, a, temp1, 0, 0, rows / 2, columns / 2, rows / 2)), (temp2 = sum(b, b, temp2, 0, 0, rows / 2, columns / 2, rows / 2)), p, rows / 2, columns / 2);
-        strassen((temp1 = sum(a, a, temp1, rows / 2, 0, rows / 2, columns / 2, rows / 2)), (temp2 = part(b, temp2, 0, 0, rows / 2)), q, rows / 2, columns / 2);
-        strassen((temp1 = part(a, temp1, 0, 0, rows / 2)), (temp2 = sub(b, b, temp2, 0, columns / 2, rows / 2, columns / 2, rows / 2)), r, rows / 2, columns / 2);
-        strassen((temp1 = part(a, temp1, rows / 2, columns / 2, rows / 2)), (temp2 = sub(b, b, temp2, rows / 2, 0, 0, 0, rows / 2)), s, rows / 2, columns / 2);
-        strassen((temp1 = sum(a, a, temp1, 0, 0, 0, columns / 2, rows / 2)), (temp2 = part(b, temp2, rows / 2, columns / 2, rows / 2)), t, rows / 2, columns / 2);
-        strassen((temp1 = sub(a, a, temp1, rows / 2, 0, 0, 0, rows / 2)), (temp2 = sum(b, b, temp2, 0, 0, 0, columns / 2, rows / 2)), u, rows / 2, columns / 2);
-        strassen((temp1 = sub(a, a, temp1, 0, columns / 2, rows / 2, columns / 2, rows / 2)), (temp2 = sum(b, b, temp2, rows / 2, 0, rows / 2, columns / 2, rows / 2)), v, rows / 2, columns / 2);
+        strassen((sum(a, a, temp1, 0, 0, rows / 2, columns / 2, rows / 2)), (sum(b, b, temp2, 0, 0, rows / 2, columns / 2, rows / 2)), p, rows / 2, columns / 2);
+        strassen((sum(a, a, temp1, rows / 2, 0, rows / 2, columns / 2, rows / 2)), (part(b, temp2, 0, 0, rows / 2)), q, rows / 2, columns / 2);
+        strassen((part(a, temp1, 0, 0, rows / 2)), (sub(b, b, temp2, 0, columns / 2, rows / 2, columns / 2, rows / 2)), r, rows / 2, columns / 2);
+        strassen((part(a, temp1, rows / 2, columns / 2, rows / 2)), (sub(b, b, temp2, rows / 2, 0, 0, 0, rows / 2)), s, rows / 2, columns / 2);
+        strassen((sum(a, a, temp1, 0, 0, 0, columns / 2, rows / 2)), (part(b, temp2, rows / 2, columns / 2, rows / 2)), t, rows / 2, columns / 2);
+        strassen((sub(a, a, temp1, rows / 2, 0, 0, 0, rows / 2)), (sum(b, b, temp2, 0, 0, 0, columns / 2, rows / 2)), u, rows / 2, columns / 2);
+        strassen((sub(a, a, temp1, 0, columns / 2, rows / 2, columns / 2, rows / 2)), (sum(b, b, temp2, rows / 2, 0, rows / 2, columns / 2, rows / 2)), v, rows / 2, columns / 2);
         int **c00 = NULL, **c01 = NULL, **c10 = NULL, **c11 = NULL;
         c00 = matralloc(c00, rows / 2, columns / 2);
         c01 = matralloc(c01, rows / 2, columns / 2);
         c10 = matralloc(c10, rows / 2, columns / 2);
         c11 = matralloc(c11, rows / 2, columns / 2);
-        c00 = sum(temp2 = sub(temp1 = (sum(p, s, temp1, 0, 0, 0, 0, rows / 2)), t, temp2, 0, 0, 0, 0, rows / 2), v, c00, 0, 0, 0, 0, rows / 2);
+        c00 = sum(sub((sum(p, s, temp1, 0, 0, 0, 0, rows / 2)), t, temp2, 0, 0, 0, 0, rows / 2), v, c00, 0, 0, 0, 0, rows / 2);
         c01 = sum(r, t, c01, 0, 0, 0, 0, rows / 2);
         c10 = sum(q, s, c10, 0, 0, 0, 0, rows / 2);
-        c11 = sum(temp2 = sub(temp1 = (sum(p, r, temp1, 0, 0, 0, 0, rows / 2)), q, temp2, 0, 0, 0, 0, rows / 2), u, c11, 0, 0, 0, 0, rows / 2);
-        free(p);
-        free(q);
-        free(r);
-        free(s);
-        free(t);
-        free(u);
-        free(v);
-        free(temp1);
-        free(temp2);
+        c11 = sum(sub((sum(p, r, temp1, 0, 0, 0, 0, rows / 2)), q, temp2, 0, 0, 0, 0, rows / 2), u, c11, 0, 0, 0, 0, rows / 2);
         for (int i = 0; i < rows / 2; i++)
         {
             for (int j = 0; j < columns / 2; j++)
@@ -137,6 +125,15 @@ void strassen(int **a, int **b, int **c, int rows, int columns)
                 *(*(c + i + rows / 2) + j + columns / 2) = *(*(c11 + i) + j);
             }
         }
+        free(p);
+        free(q);
+        free(r);
+        free(s);
+        free(t);
+        free(u);
+        free(v);
+        free(temp1);
+        free(temp2);
         free(c00);
         free(c01);
         free(c10);
@@ -160,8 +157,11 @@ int main()
     accept(a, m, m);
     printf("Enter the elements of m2.\n");
     accept(b, m, m);
-    padding(a, m, n);
-    padding(b, m, n);
+    if (m != n)
+    {
+        padding(a, m, n);
+        padding(b, m, n);
+    }
     strassen(a, b, c, n, n);
     int w;
     printf("Enter the display width for the resultant matrix elements.\n");
