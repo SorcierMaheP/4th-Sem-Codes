@@ -25,6 +25,7 @@ void display(int **a, int rows, int columns)
         }
         printf("\n");
     }
+    printf("\n");
 }
 int **sum(int **a, int **b, int **c, int r1, int c1, int r2, int c2)
 {
@@ -109,6 +110,20 @@ void strassen(int **a, int **b, int **c, int rows, int columns)
                 *(*(c + i + 2) + j + 2) = *(*(c11 + i) + j);
             }
         }
+        printf("P:\n");
+        display(p, 2, 2);
+        printf("Q:\n");
+        display(q, 2, 2);
+        printf("R:\n");
+        display(r, 2, 2);
+        printf("S:\n");
+        display(s, 2, 2);
+        printf("T:\n");
+        display(t, 2, 2);
+        printf("U:\n");
+        display(u, 2, 2);
+        printf("V:\n");
+        display(v, 2, 2);
     }
 }
 int main()
