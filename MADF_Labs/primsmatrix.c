@@ -1,25 +1,11 @@
 #include <stdio.h>
 int adj[100][100], cost[100][100], near[100];
-void init_cost(int n, int ver)
+void init_cost(int n)
 {
-    if (ver == 1)
+    for (int i = 0; i < n; i++)
     {
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-                cost[i][j] = -1;
-        }
-    }
-    else
-    {
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (cost[i][j] == -1)
-                    cost[i][j] = __INT32_MAX__;
-            }
-        }
+        for (int j = 0; j < n; j++)
+            cost[i][j] = __INT32_MAX__;
     }
 }
 void accept_graph(int n)
@@ -121,9 +107,8 @@ int main()
     printf("Enter the number of vertices of the graph.\n");
     scanf("%d", &n);
     int t[n - 1][2];
-    init_cost(n, 1);
+    init_cost(n);
     accept_graph(n);
-    init_cost(n, 2);
     int ans = prims(n, t);
     printf("Final Mincost: ");
     printf("%d\n", ans);
