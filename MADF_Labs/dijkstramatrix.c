@@ -34,7 +34,7 @@ void init_cost(int n)
             cost[i][j] = __INT32_MAX__;
     }
 }
-void init_dist(int dist[8], int n)
+void init_dist(int dist[], int n)
 {
     for (int i = 0; i < n; i++)
         dist[i] = 0;
