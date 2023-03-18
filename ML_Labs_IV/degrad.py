@@ -13,3 +13,5 @@ if (inp == 1):
     deg()
 elif (inp == 2):
     rad()
+else:
+    print("Invalid input.")
