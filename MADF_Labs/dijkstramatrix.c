@@ -39,11 +39,11 @@ void init_dist(int dist[], int n)
     for (int i = 0; i < n; i++)
         dist[i] = 0;
 }
-void init_path(int n)
+void init_path(int n, int v)
 {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < 1; j++)
-            path[i][j] = 0;
+            path[i][j] = v - 1;
     for (int i = 0; i < n; i++)
         for (int j = 1; j < 100; j++)
             path[i][j] = -1;
@@ -147,22 +147,25 @@ int main()
     int dist[n];
     init_cost(n);
     init_dist(dist, n);
-    init_path(n);
     accept_graph(n);
     // accept_graph(fp, n);
     // fclose(fp);
     int v;
     printf("Enter the source vertex of the graph.\n");
     scanf("%d", &v);
+    init_path(n, v);
     init_dijkstra(v, dist, n);
     printf("PATH%44cLENGTH\n", ' ');
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         int elems = 0;
-        for (int j = 0; path[i][j] != -1; j++, elems++)
-            printf("%d ", path[i][j] + 1);
-        printf("%*d", 50 - (2 * (elems - 1)), dist[i]);
-        printf("\n");
+        if (dist[i] != __INT32_MAX__ && dist[i] != 0)
+        {
+            for (int j = 0; path[i][j] != -1; j++, elems++)
+                printf("%d ", path[i][j] + 1);
+            printf("%*d", 50 - (2 * (elems - 1)), dist[i]);
+            printf("\n");
+        }
     }
     return 0;
 }
