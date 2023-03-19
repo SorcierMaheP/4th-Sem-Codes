@@ -140,7 +140,7 @@ void init_dijkstra(int v, int dist[], int n)
 int main()
 {
     // FILE *fp;
-    // fp = fopen("file.txt", "r+");
+    // fp = fopen("graph2.txt", "r+");
     int n;
     printf("Enter the number of vertices of the graph.\n");
     scanf("%d", &n);
