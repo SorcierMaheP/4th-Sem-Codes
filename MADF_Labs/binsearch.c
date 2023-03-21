@@ -1,8 +1,27 @@
 #include <stdio.h>
 char a[100];
+void bubble(int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int exch = 0;
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (a[j] > a[j + 1])
+            {
+                char temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+                exch++;
+            }
+        }
+        if (!exch)
+            break;
+    }
+}
 int binsearch(char a[], int low, int high, char x)
 {
-    if (low == high)
+    if (low >= high)
     {
         if (a[low] == x)
             return low;
@@ -30,6 +49,7 @@ int main()
     scanf("%d", &n);
     printf("Enter character array.\n");
     scanf("%s", a);
+    bubble(n);
     int pos = binsearch(a, 0, n - 1, x);
     if (pos == -1)
         printf("Elem not found.\n");

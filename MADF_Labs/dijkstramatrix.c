@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 int adj[100][100], cost[100][100], path[100][100];
-// void accept_graph(FILE *fp, int n)
-void accept_graph(int n)
+void accept_graph(FILE *fp, int n)
+// void accept_graph(int n)
 {
     int max_edges = n * (n - 1);
     int origin, destin, edgecost;
     printf("Enter the edges of the graph and their respective cost.\n");
     for (int i = 0; i < max_edges; i++)
     {
-        printf("Enter the edge,( 0 0 randval) to quit :");
-        scanf("%d %d %d", &origin, &destin, &edgecost);
-        // fscanf(fp, "%d %d %d", &origin, &destin, &edgecost);
+        // printf("Enter the edge,( 0 0 randval) to quit :");
+        // scanf("%d %d %d", &origin, &destin, &edgecost);
+        fscanf(fp, "%d %d %d", &origin, &destin, &edgecost);
         if ((origin == 0) && (destin == 0))
             break;
         if (origin > n || destin > n || origin <= 0 || destin <= 0)
@@ -48,9 +48,20 @@ void init_path(int n, int v)
         for (int j = 1; j < 100; j++)
             path[i][j] = -1;
 }
+void display(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == __INT32_MAX__)
+            printf("∞ ");
+        else
+            printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
 void rec_dijkstra(int v, int dist[], int n, int S[], int counter)
 {
-    if (counter < n - 1)
+    if (counter < n)
     {
         int min = __INT32_MAX__, minj = -1;
         for (int j = 0; j < n; j++)
@@ -61,6 +72,7 @@ void rec_dijkstra(int v, int dist[], int n, int S[], int counter)
                 minj = j;
             }
         }
+        printf("u=%d\n", minj + 1);
         S[minj] = true;
         for (int k = 0; k < n; k++)
         {
@@ -115,6 +127,7 @@ void rec_dijkstra(int v, int dist[], int n, int S[], int counter)
                 }
             }
         }
+        display(dist, n);
         rec_dijkstra(v, dist, n, S, ++counter);
     }
 }
@@ -128,6 +141,8 @@ void init_dijkstra(int v, int dist[], int n)
     }
     S[v - 1] = true;
     dist[v - 1] = 0;
+    printf("u=%d\n", v);
+    display(dist, n);
     for (int i = 0; i < n; i++)
     {
         for (int j = 1; j < 2; j++)
@@ -139,17 +154,17 @@ void init_dijkstra(int v, int dist[], int n)
 }
 int main()
 {
-    // FILE *fp;
-    // fp = fopen("graph2.txt", "r+");
+    FILE *fp;
+    fp = fopen("graph2.txt", "r+");
     int n;
     printf("Enter the number of vertices of the graph.\n");
     scanf("%d", &n);
     int dist[n];
     init_cost(n);
     init_dist(dist, n);
-    accept_graph(n);
-    // accept_graph(fp, n);
-    // fclose(fp);
+    // accept_graph(n);
+    accept_graph(fp, n);
+    fclose(fp);
     int v;
     printf("Enter the source vertex of the graph.\n");
     scanf("%d", &v);
