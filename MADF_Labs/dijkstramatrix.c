@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 int adj[100][100], cost[100][100], path[100][100];
-void accept_graph(FILE *fp, int n)
-// void accept_graph(int n)
+// void accept_graph(FILE *fp, int n)
+void accept_graph(int n)
 {
     int max_edges = n * (n - 1);
     int origin, destin, edgecost;
     printf("Enter the edges of the graph and their respective cost.\n");
     for (int i = 0; i < max_edges; i++)
     {
-        // printf("Enter the edge,( 0 0 randval) to quit :");
-        // scanf("%d %d %d", &origin, &destin, &edgecost);
-        fscanf(fp, "%d %d %d", &origin, &destin, &edgecost);
+        printf("Enter the edge,( 0 0 randval) to quit :");
+        scanf("%d %d %d", &origin, &destin, &edgecost);
+        // fscanf(fp, "%d %d %d", &origin, &destin, &edgecost);
         if ((origin == 0) && (destin == 0))
             break;
         if (origin > n || destin > n || origin <= 0 || destin <= 0)
@@ -154,17 +154,17 @@ void init_dijkstra(int v, int dist[], int n)
 }
 int main()
 {
-    FILE *fp;
-    fp = fopen("graph2.txt", "r+");
+    // FILE *fp;
+    // fp = fopen("graph2.txt", "r+");
     int n;
     printf("Enter the number of vertices of the graph.\n");
     scanf("%d", &n);
     int dist[n];
     init_cost(n);
     init_dist(dist, n);
-    // accept_graph(n);
-    accept_graph(fp, n);
-    fclose(fp);
+    accept_graph(n);
+    // accept_graph(fp, n);
+    // fclose(fp);
     int v;
     printf("Enter the source vertex of the graph.\n");
     scanf("%d", &v);
