@@ -120,7 +120,7 @@ void bellmanford(int n, int v)
 int main()
 {
     // FILE *fp;
-    // fp = fopen("graph2.txt", "r+");
+    // fp = fopen("graph5.txt", "r+");
     int n;
     printf("Enter the number of vertices of the graph.\n");
     scanf("%d", &n);
