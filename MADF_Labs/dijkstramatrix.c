@@ -45,7 +45,7 @@ void init_path(int n, int v)
         for (int j = 0; j < 1; j++)
             path[i][j] = v - 1;
     for (int i = 0; i < n; i++)
-        for (int j = 1; j < 100; j++)
+        for (int j = 1; j < n; j++)
             path[i][j] = -1;
 }
 void display(int arr[], int n)
