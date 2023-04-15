@@ -1,58 +1,60 @@
 section .data
-    input db 'Enter number:'
-    i_len equ $-input
-
-    output db 'The two numbers are:'
-    o_len equ $-output
-
-section .bss
-    num1 resb 4
-    num2 resb 4
+    num1 equ 2
+    num2 equ 7
+    msg db "The numbers are: ", 0
+    buffer times 2 db 0
 
 section .text
     global _start
 
 _start:
-    mov eax,4
-    mov ebx,1
-    mov ecx,input
-    mov edx,i_len
-    int 0x80
-    
-    ;Input number 1
-
-    mov eax,3
-    mov ebx,2
-    mov ecx,num1
-    int 0x80
-    
-    mov eax,4
-    mov ebx,1
-    mov ecx,input
-    mov edx,i_len
-    int 0x80
-    
-    ;Input number 2
-
-    mov eax,3
-    mov ebx,2
-    mov ecx,num2
-    int 0x80
-    
-    mov eax,4
-    mov ebx,1
-    mov ecx,output
-    mov edx,o_len
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, msg
+    mov edx, 17
     int 0x80
 
-    ;Print the 2 numbers
+    ; convert number1 to string
+    mov eax, num1
+    mov ebx, 10
+    mov edx, 0
+    div ebx
+    add edx, '0'
+    mov byte [buffer], dl
+    mov byte [buffer+1], ' '
+    mov esi, buffer
 
-    mov eax,4
-    mov ebx,1
-    mov ecx,num1
-    mov edx,num2
+    mov ecx, esi
+    sub ecx, buffer
+    add ecx, 2
+
+    ; print number1 string
+    mov eax, 4
+    mov ebx, 1
+    mov edx, ecx
+    mov ecx, buffer
     int 0x80
-    
-mov eax,1
-mov ebx,0
+
+    ; convert number2 to string
+    mov eax, num2
+    mov ebx, 10
+    mov edx, 0
+    div ebx
+    add edx, '0'
+    mov byte [buffer], dl
+    mov esi, buffer
+
+    mov ecx, esi
+    sub ecx, buffer
+    add ecx, 2
+
+    ; print number2 string
+    mov eax, 4
+    mov ebx, 1
+    mov edx, ecx
+    mov ecx, buffer
+    int 0x80
+
+mov eax, 1
+mov ebx, 0
 int 0x80
