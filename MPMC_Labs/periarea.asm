@@ -9,7 +9,7 @@ section .data
 	displayperirect db "The perimeter is: ", 9
 	displayperirectlen equ $-displayperirect
 
-    askusertrig db "Enter the side of a triangle: ", 10
+	askusertrig db "Enter the side of a triangle: ", 10
 	askusertriglen equ $-askusertrig
 	askUserHeight db "Enter the height of a triangle: ", 10
 	askHeightLen equ $-askUserHeight
@@ -23,55 +23,55 @@ section .data
 	newLineLen equ $-newLineMsg
 
 section .bss
-    length resb 2
-    breadth resb 2
-    inter resb 2
-    area resb 2
-    perimeter resb 2
-    side1 resb 2
+	length resb 2
+	breadth resb 2
+	inter resb 2
+	area resb 2
+	perimeter resb 2
+	side1 resb 2
 	side2 resb 2
 	side3 resb 2
 	height resb 2
 
 section .text
-    global _start
+	global _start
 
 _start:
 
-;-----Rectangle Calculation
-    mov eax, 4
+	;-----Rectangle Calculation
+	mov eax, 4
 	mov ebx, 1
 	mov ecx, askuserrect
 	mov edx, askuserrectlen
 	int 0x80
 
-    mov eax, 3
+	mov eax, 3
 	mov ebx, 2
 	mov ecx, length
 	mov edx, 2
 	int 0x80
 
-    mov eax, 4
+	mov eax, 4
 	mov ebx, 1
 	mov ecx, askUserBreadth
 	mov edx, askBreadthLen
 	int 0x80
 
-    mov eax, 3
+	mov eax, 3
 	mov ebx, 2
 	mov ecx, breadth
 	mov edx, 2
 	int 0x80
 
-    mov al, [length]
-    sub al, '0'
-    mov bl, [breadth]
-    sub bl, '0'
-    mul bl
-    add al, '0'
-    mov [area], al
+	mov al, [length]
+	sub al, '0'
+	mov bl, [breadth]
+	sub bl, '0'
+	mul bl
+	add al, '0'
+	mov [area], al
 
-    mov eax, 4
+	mov eax, 4
 	mov ebx, 1
 	mov ecx, displayarearect
 	mov edx, displayarearectlen
@@ -89,23 +89,23 @@ _start:
 	mov edx, newLineLen
 	int 0x80
 
-    mov eax, [length]
-    sub eax, '0'
-    mov ebx, [breadth]
-    sub ebx, '0'
-    add eax, ebx
-    add eax, '0'
-    mov [inter], eax
+	mov eax, [length]
+	sub eax, '0'
+	mov ebx, [breadth]
+	sub ebx, '0'
+	add eax, ebx
+	add eax, '0'
+	mov [inter], eax
 
-    mov al, [inter]
-    sub al, '0'
-    mov bl, '2'
-    sub bl, '0'
-    mul bl
-    add al, '0'
-    mov [perimeter], al
+	mov al, [inter]
+	sub al, '0'
+	mov bl, '2'
+	sub bl, '0'
+	mul bl
+	add al, '0'
+	mov [perimeter], al
 
-    mov eax, 4
+	mov eax, 4
 	mov ebx, 1
 	mov ecx, displayperirect
 	mov edx, displayperirectlen
@@ -117,19 +117,19 @@ _start:
 	mov edx, 2
 	int 0x80
 
-    mov eax, 4
+	mov eax, 4
 	mov ebx, 1
 	mov ecx, newLineMsg
 	mov edx, newLineLen
 	int 0x80
 
-;-----Triangle calculation
+	;-----Triangle calculation
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, askusertrig
 	mov edx, askusertriglen
 	int 0x80
-	
+
 	mov eax, 3
 	mov ebx, 2
 	mov ecx, side1
@@ -167,7 +167,7 @@ _start:
 	mul bl
 	add al, '0'	
 	mov [inter], al
-	
+
 	mov al, [inter]
 	sub al, '0' 
 	mov bl, '2'
