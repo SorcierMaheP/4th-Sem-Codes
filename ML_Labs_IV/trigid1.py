@@ -2,6 +2,8 @@ from math import sin, cos, tan, isclose
 n = float(input("Enter the value of angle."))
 lhs = cos(n)/((1/cos(n))+tan(n))
 rhs = 1-sin(n)
+print(lhs)
+print(rhs)
 if (isclose(lhs, rhs)):
     print("Identity proved.")
     quit()
