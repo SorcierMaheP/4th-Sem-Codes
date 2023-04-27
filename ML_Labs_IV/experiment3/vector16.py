@@ -1,6 +1,4 @@
 import numpy as np
-  
-import numpy as np
 
 # to enter a 2d  numpy matrix
 m = int(input("Enter dimension m: "))
