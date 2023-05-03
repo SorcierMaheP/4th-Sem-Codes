@@ -51,19 +51,20 @@ def acc_complex_matrix():
     return mat
 
 
+print("1:Add, subtract, multiply and divide two vectors.")
+print("2:Compute the vector dot product.")
+print("3:Find the sum of values in a matrix.")
+print("4:Calculate the sum of the diagonal elements of a NumPy array.")
+print("5:Add and Subtract Matrices in Python.")
+print("6:Add row/columns in numpy array.")
+print("7:Matrix Multiplication in NumPy.")
+print("8:Inverse a matrix using NumPy.")
+print("9:Count the frequency of unique values in NumPy array.")
+print("10:Multiply matrices of complex numbers using NumPy in Python.")
+print("11:Program to find matrix Determinant, Trace, Eigenvalues, Eigenvectors, Singular value decomposition of a Matrix.")
+print("12:Exit.")
+
 while (1):
-    print("1:Add, subtract, multiply and divide two vectors.")
-    print("2:Compute the vector dot product.")
-    print("3:Find the sum of values in a matrix.")
-    print("4:Calculate the sum of the diagonal elements of a NumPy array.")
-    print("5:Add and Subtract Matrices in Python.")
-    print("6:Add row/columns in numpy array.")
-    print("7:Matrix Multiplication in NumPy.")
-    print("8:Inverse a matrix using NumPy.")
-    print("9:Count the frequency of unique values in NumPy array.")
-    print("10:Multiply matrices of complex numbers using NumPy in Python.")
-    print("11:Program to find matrix Determinant, Trace, Eigenvalues, Eigenvectors, Singular value decomposition of a Matrix.")
-    print("12:Exit.")
     choice = int(input("Enter choice."))
     match choice:
         case 1:
