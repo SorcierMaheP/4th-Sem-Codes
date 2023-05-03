@@ -1,10 +1,9 @@
 import numpy as np
-import math
 import matplotlib.pyplot as plt
 
 
 def SequenceDetector():
-    # inputing arrays using list comprehension, then
+    # inputting arrays using list comprehension, then
     # converting to a numpy array
     array = np.array([int(i) for i in input("Enter elements: ").split()])
 
@@ -35,29 +34,29 @@ def polynomial(x, y):
     print("quotient = ", np.polydiv(x, y))
 
 
-print("1: Create a Numpy array filled with all ones.")
-print("2: Find the number of occurrences of a sequence in a NumPy array")
-print("3: Interchange two axes of an array")
-print("4: Trim the leading and/or trailing zeros from a 1-D array")
-print("5: Reverse a numpy array")
-print("6: make a NumPy array read-only.")
-print("7: Replace NumPy array elements that doesn't satisfy the given condition")
-print("8: Remove columns in Numpy array that contains non-numeric values")
-print("9: Create a Numpy array with random values")
-print("10: Get the n-largest values of an array using NumPy.")
-print("11: Get the floor, ceiling and truncated values of the elements of a numpy array")
-print("12: Evaluate Einstein's summation convention of two multidimensional NumPy arrays")
-print("13: Compute the variance of the NumPy array")
-print("14: Compute the standard deviation of the NumPy array")
-print("15: Compute pearson product-moment correlation coefficients of two given NumPy arrays")
-print("16: Calculate the mean across dimension in a 2D NumPy array")
-print("17: Define a polynomial function. Add, subtract, multiply and divide one polynomial to another using NumPy")
-print("18: Save a NumPy array to a text file?")
-print("19: Load data from a text file")
-print("20: Plot line graph from NumPy array")
-print("21: Create Histogram using NumPy")
-print("0:Exit.")
 while (1):
+    print("1: Create a Numpy array filled with all ones.")
+    print("2: Find the number of occurrences of a sequence in a NumPy array")
+    print("3: Interchange two axes of an array")
+    print("4: Trim the leading and/or trailing zeros from a 1-D array")
+    print("5: Reverse a numpy array")
+    print("6: make a NumPy array read-only.")
+    print("7: Replace NumPy array elements that doesn't satisfy the given condition")
+    print("8: Remove columns in Numpy array that contains non-numeric values")
+    print("9: Create a Numpy array with random values")
+    print("10: Get the n-largest values of an array using NumPy?")
+    print("11: get the floor, ceiling and truncated values of the elements of a numpy array")
+    print("12: Evaluate Einstein's summation convention of two multidimensional NumPy arrays")
+    print("13: Compute the variance of the NumPy array")
+    print("14: Compute the standard deviation of the NumPy array")
+    print("15: Compute pearson product-moment correlation coefficients of two given NumPy arrays")
+    print("16: Calculate the mean across dimension in a 2D NumPy array")
+    print("17: Define a polynomial function. Add, subtract, multiply and divide one polynomial to another using NumPy")
+    print("18:  save a NumPy array to a text file?")
+    print("19: Load data from a text file")
+    print("20: Plot line graph from NumPy array")
+    print("21: Create Histogram using NumPy")
+    print("0:Exit.")
     choice = int(input("Enter choice."))
     match choice:
         case 1:
@@ -71,7 +70,7 @@ while (1):
             n = int(input("Enter dimension n: "))
 
             array = np.array([[int(i) for i in input(
-                f"Enter elements of row {j}: ").split()] for j in range(m)])
+                f"Enter elements of row {j}: ").split()] for j in range(n)])
 
             print("original matrix: ", array)
             array = np.swapaxes(array, 0, 1)
@@ -96,27 +95,24 @@ while (1):
                              for i in input("Enter elements: ").split()])
 
             array.flags.writeable = False
-            array[0] = 2
+
+            print(array)
         case 7:
-            array = np.array([int(i)
-                             for i in input("Enter elements: ").split()])
-            print("if element is not divisible by 2 replace it by 0")
-            array[array % 2 != 0] = 0
+            array = [int(i) for i in input("Enter elements: ").split()]
+            array = np.extract(np.mod(array, 2) != 0, array)
             print(array)
         case 8:
-            array = [[math.nan, 2, 3], [math.nan, 3, 4]]
-
-            # inputing the 2 matrices
-            array = np.array(array)
+            n_arr = np.array([[10.5, 22.5, 10.5],
+                              [41, 52.5, 25],
+                              [100, np.nan, 41]])
 
             print("Given array:")
-            print(array)
+            print(n_arr)
 
             print("\nRemove all columns containing non-numeric elements ")
-            print(array[:, ~np.isnan(array).any(axis=0)])
+            print(n_arr[:, ~np.isnan(n_arr).any(axis=0)])
         case 9:
-            n = int(input("Enter size of array."))
-            array = np.random.rand(1, n)
+            array = np.random.rand(1, 10)
             print(array)
         case 10:
             array = np.array([int(i)
@@ -140,10 +136,10 @@ while (1):
 
             # inputing the 2 matrices
             array1 = np.array([[int(i) for i in input(
-                f"Enter elements of row {j} of array 1: ").split()] for j in range(m)])
+                f"Enter elements of row {j} of array 1: ").split()] for j in range(n)])
 
             array2 = np.array([[int(i) for i in input(
-                f"Enter elements of row {j} of array 2: ").split()] for j in range(m)])
+                f"Enter elements of row {j} of array 2: ").split()] for j in range(n)])
 
             print("Original matrices: ")
             print(array1)
@@ -178,7 +174,7 @@ while (1):
             n = int(input("Enter dimension n: "))
 
             array = np.array([[int(i) for i in input(
-                f"Enter elements of row {j}: ").split()] for j in range(m)])
+                f"Enter elements of row {j}: ").split()] for j in range(n)])
 
             # Calculating mean across Rows
             row_mean = np.mean(array, axis=1)
@@ -192,51 +188,51 @@ while (1):
             for i in range(len(column_mean)):
                 print(f"mean of column {i} = ", column_mean[i])
         case 17:
-            array1 = np.array([int(i)
-                               for i in input("Enter poly1: ").split()])
-            array2 = np.array([int(i)
-                               for i in input("Enter poly2: ").split()])
-            polynomial(array1, array2)
+            polynomial((1, 2, 3), (1, 2, 3))
         case 18:
             array = np.array([int(i)
                              for i in input("Enter elements: ").split()])
 
-            file = open("./Lab Submissions/file.txt", "+w")
+            file = open("./file.txt", "+w")
 
             for i in array:
                 file.write(str(i) + "\n")
 
             file.close()
         case 19:
-            array = np.loadtxt("./Lab Submissions/file.txt")
+            array = np.loadtxt("file.txt")
             print(array)
         case 20:
+            # data to be plotted
+            x = np.arange(1, 11)
+            y = x * x
 
-            x = np.array([int(i)
-                          for i in input("Enter x elements: ").split()])
-            y = np.array([int(i)
-                          for i in input("Enter y elements: ").split()])
-
+            # plotting
             plt.title("Line graph")
             plt.xlabel("X axis")
             plt.ylabel("Y axis")
-            plt.plot(x, y, color="red")
+            plt.plot(x, y, color ="red")
             plt.show()
-        case 21:
+        case 21: 
+            # Creating dataset
+            a = np.random.randint(100, size =(50))
 
-            a = np.random.randint(100, size=(50))
-            bins = np.array([int(i)
-                             for i in input("Enter bins value: ").split()])
-            np.histogram(a, bins)
-            hist, bins = np.histogram(a, bins)
+            # Creating histogram
+            np.histogram(a, bins = [0, 10, 20, 30, 40,
+                                    50, 60, 70, 80, 90,
+                                    100])
+
+            hist, bins = np.histogram(a, bins = [0, 10,
+                                                 20, 30,
+                                                 40, 50,
+                                                 60, 70,
+                                                 80, 90,
+                                                 100])
+
             # printing histogram
             print()
-            print(hist)
-            print(bins)
-            fig = plt.figure(figsize=(10, 7))
-            plt.hist(a, bins)
-            plt.title("Numpy Histogram")
-            plt.show()
+            print (hist)
+            print (bins)
             print()
         case 0:
             quit()
