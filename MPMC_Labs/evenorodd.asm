@@ -35,10 +35,10 @@ _start:
 	mov bl,'2'
 	sub bl,'0'
 	div bl
-	CMP al,bl
+	CMP ah,0
 	
-	JE L1
-	JMP L2
+	JE L2
+	JMP L1
 	
 	L1:
 		mov eax,4
