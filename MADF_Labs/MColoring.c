@@ -30,7 +30,7 @@ void show(int x[N], int nodes)
     printf("%d.\t", ++count);
     for (int i = 0; i < nodes; i++)
         printf("%c ", C[x[i]]);
-    printf("\n");
+    printf("\t");
 }
 void nextvalue(int x[N], int nodes, int colours, int k)
 {
