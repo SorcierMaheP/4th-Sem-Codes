@@ -1,25 +1,25 @@
 %macro write 2
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, %1
-    mov edx, %2
-    int 0x80
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, %1
+	mov edx, %2
+	int 0x80
 %endmacro
 
 %macro read 2
-    mov eax, 3
-    mov ebx, 2
-    mov ecx, %1
-    mov edx, %2
-    int 0x80
+	mov eax, 3
+	mov ebx, 2
+	mov ecx, %1
+	mov edx, %2
+	int 0x80
 %endmacro
 
 %macro newline 0
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, nl
-    mov edx, nllen
-    int 0x80
+	mov eax, 4
+	mov ebx, 1
+	mov ecx, nl
+	mov edx, nllen
+	int 0x80
 %endmacro
 
 %macro form 3
@@ -50,8 +50,8 @@ section .data
 	nl db "", 10
 	nllen equ $-nl
 
-    spa db " "
-    spalen equ $-spa
+	spa db " "
+	spalen equ $-spa
 	
 section .text
 	global _start
@@ -70,7 +70,7 @@ _start:
 	
 	L1:
 	write a, 4
-    write spa,spalen
+	write spa,spalen
 	inc byte[i]
 	mov al, [i]
 	cmp al, byte[n]
@@ -79,7 +79,7 @@ _start:
 	
 	L2:
 	write b, 4
-    write spa,spalen
+	write spa,spalen
 	inc byte[i]
 	
 	mov al, [i]
