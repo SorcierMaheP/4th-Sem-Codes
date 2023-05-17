@@ -43,7 +43,7 @@
 	mov [%3], eax
 %endmacro
 
-%macro PROD 3s
+%macro PROD 3
 	mov al, [%1]
 	sub al, '0'
 	mov bl, [%2]

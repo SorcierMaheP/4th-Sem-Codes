@@ -12,9 +12,9 @@ void PurgeKnap(struct knap S[MAX], int size)
     {
         for (int j = 0; j < size; j++)
         {
-            if (S[i].p < S[j].p && S[i].w >= S[j].w)
+            if ((S[i].p < S[j].p && S[i].w >= S[j].w) || (S[i].p == S[j].p && S[i].w > S[j].w))
                 S[i].p = S[i].w = -1;
-            else if (S[j].p < S[i].p && S[j].w >= S[i].w)
+            else if ((S[j].p < S[i].p && S[j].w >= S[i].w) || (S[i].p == S[j].p && S[i].w < S[j].w))
                 S[j].p = S[j].w = -1;
         }
         for (int j = i + 1; j < size; j++)
