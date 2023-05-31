@@ -122,7 +122,7 @@ int main()
 {
     printf("Enter number of knapsack values and size of knapsack.\n");
     scanf("%d%d", &n, &m);
-    struct knap K[n + 1];
+    struct knap K[n];
     int p_values[MAX], w_values[MAX];
     printf("Enter profits of knapsack.\n");
     for (int i = 0; i < n; i++)

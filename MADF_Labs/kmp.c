@@ -56,8 +56,11 @@ void KMP(char test[], char pattern[], int n, int m)
 
 int main()
 {
-    char test[] = "aabbbaababbbabab";
-    char pattern[] = "bbaba";
+    char test[50], pattern[50];
+    printf("Enter test string.\n");
+    scanf("%s", test);
+    printf("Enter pattern string.\n");
+    scanf("%s", pattern);
     KMP(test, pattern, strlen(test), strlen(pattern));
     return 0;
 }

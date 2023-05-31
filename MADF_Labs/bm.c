@@ -8,14 +8,14 @@ int min(int a, int b)
     return a < b ? a : b;
 }
 
-void last(char p[MAX], int m)
+void last(char pattern[MAX], int m)
 {
-    // Index of the last (right most) occurrence of c in P.
+    // Index of the last (right most) occurrence of c in pattern.
     // Otherwise we define last(c) = -1.
     for (int i = 0; i < MAX; i++)
         lastarr[i] = -1;
     for (int i = 0; i < m; i++)
-        lastarr[(int)p[i]] = i;
+        lastarr[(int)pattern[i]] = i;
 }
 
 void BM(char test[], char pattern[], int n, int m)
@@ -53,8 +53,11 @@ void BM(char test[], char pattern[], int n, int m)
 
 int main()
 {
-    char test[] = "112311423411";
-    char pattern[] = "4112113";
+    char test[50], pattern[50];
+    printf("Enter test string.\n");
+    scanf("%s", test);
+    printf("Enter pattern string.\n");
+    scanf("%s", pattern);
     BM(test, pattern, strlen(test), strlen(pattern));
     return 0;
 }
