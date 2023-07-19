@@ -27,12 +27,12 @@ void SumofSubsets(int s, int k, int r)
     }
     else if (s + w[k] + w[k + 1] <= m)
     {
-        SumofSubsets(s + w[k], k + 1, r);
+        SumofSubsets(s + w[k], k + 1, r - w[k]);
     }
     if ((s + r - w[k] >= m) && (s + w[k + 1] <= m))
     {
         x[k] = 0;
-        SumofSubsets(s, k + 1, r);
+        SumofSubsets(s, k + 1, r - w[k]);
     }
 }
 int main()
